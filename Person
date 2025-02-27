@@ -1,0 +1,132 @@
+package Hovuanhngoc_6288;
+
+import java.util.Scanner;
+import java.util.Date;
+import java.text.SimpleDateFormat;
+import java.text.ParseException;
+
+public abstract class Person implements IPerson {
+    private String id;
+    private String fullName;
+    private Date dateOfBirth;
+    private Date bookBorrowDate;
+    private Date bookReturnDate;
+
+    public Person() {
+    }
+
+
+    public Person(String id, String fullName, Date dateOfBirth, Date bookBorrowDate, Date bookReturnDate) {
+        this.id = id;
+        this.fullName = fullName;
+        this.dateOfBirth = dateOfBirth;
+        this.bookBorrowDate = bookBorrowDate;
+        this.bookReturnDate = bookReturnDate;
+    }
+
+    public String getId() {
+        return id;
+    }
+
+    public void setId(String id) {
+        this.id = id;
+    }
+
+    public String getFullName() {
+        return fullName;
+    }
+
+    public void setFullName(String fullName) {
+        this.fullName = fullName;
+    }
+
+    public Date getDateOfBirth() {
+        return dateOfBirth;
+    }
+
+    public void setDateOfBirth(Date dateOfBirth) {
+        this.dateOfBirth = dateOfBirth;
+    }
+
+    public Date getBookBorrowDate() {
+        return bookBorrowDate;
+    }
+
+    public void setBookBorrowDate(Date bookBorrowDate) {
+        this.bookBorrowDate = bookBorrowDate;
+    }
+
+    public Date getBookReturnDate() {
+        return bookReturnDate;
+    }
+
+    public void setBookReturnDate(Date bookReturnDate) {
+        this.bookReturnDate = bookReturnDate;
+    }
+
+    @Override
+    public void addPerson() {
+        Scanner scanner = new Scanner(System.in);
+        try {
+            System.out.print("Enter ID: ");
+            setId(scanner.nextLine());
+
+            System.out.print("Enter Full Name: ");
+            setFullName(scanner.nextLine());
+
+            SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
+
+            System.out.print("Enter Date of Birth (dd/MM/yyyy): ");
+            setDateOfBirth(sdf.parse(scanner.nextLine()));
+
+            System.out.print("Enter Book Borrow Date (dd/MM/yyyy): ");
+            setBookBorrowDate(sdf.parse(scanner.nextLine()));
+
+            System.out.print("Enter Book Return Date (dd/MM/yyyy): ");
+            setBookReturnDate(sdf.parse(scanner.nextLine()));
+
+        } catch (ParseExceptione) {
+            System.out.println("Invalid date format! Please enter again.");
+        } finally {
+            scanner.close();
+        }
+    }
+
+    public void updateBook(String id) {
+        if (this.id.equals(id)) {
+            Scanner scanner = new Scanner(System.in);
+            try {
+                System.out.print("Enter new Full Name: ");
+                setFullName(scanner.nextLine());
+
+                SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
+
+                System.out.print("Enter new Date of Birth (dd/MM/yyyy): ");
+                setDateOfBirth(sdf.parse(scanner.nextLine()));
+
+                System.out.print("Enter new Book Borrow Date (dd/MM/yyyy): ");
+                setBookBorrowDate(sdf.parse(scanner.nextLine()));
+
+                System.out.print("Enter new Book Return Date (dd/MM/yyyy): ");
+                setBookReturnDate(sdf.parse(scanner.nextLine()));
+
+            } catch (ParseException e) {
+                System.out.println("Invalid date format! Please enter again.");
+            } finally {
+                scanner.close(); 
+            }
+        } else {
+            System.out.println("Person with ID " + id + " not found.");
+        }
+    }
+
+    @Override
+    public void displayInfo() {
+        SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
+        System.out.println("ID: " + getId());
+        System.out.println("Full Name: " + getFullName());
+        System.out.println("Date of Birth: " + sdf.format(dateOfBirth));
+        System.out.println("Book Borrow Date: " + sdf.format(bookBorrowDate));
+        System.out.println("Book Return Date: " + sdf.format(bookReturnDate));
+    }
+}
